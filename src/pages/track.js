@@ -1,0 +1,52 @@
+
+import React from "react";
+import { gql, useQuery } from "@apollo/client";
+import { Layout, QueryResult } from "../components";
+import TrackDetail from "../components/track-detail"
+
+/** GET_TRACK gql query to retrieve a specific track by its ID */
+export const GET_TRACK = gql`
+    query GetTrack($trackId: ID!) {
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # Важно!!! Имя параметра trackIdDemo должно в точности повторять
+        # имя, заданное в схеме - Query.track(...) !!!
+        track(trackIdDemo: $trackId) {
+            id
+            title
+            author {
+                id
+                name
+                photo
+            }
+            thumbnail
+            length
+            modulesCount
+            numberOfViews
+            modules {
+                id
+                title
+                length
+            }
+            description
+        }
+    }
+`;
+
+/**
+ * Track Page fetches a track's data from the gql query GET_TRACK
+ * and provides it to the TrackDetail component to display
+ */
+const Track = ({ trackId }) => {
+    const { loading, error, data } = useQuery(
+      GET_TRACK,
+      {variables: { trackId }},
+    );
+    return <Layout>
+        <QueryResult error={error} loading={loading} data={data}>
+            <TrackDetail track={data?.track} />
+        </QueryResult>
+    </Layout>;
+};
+
+export default Track;
+
