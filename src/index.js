@@ -6,7 +6,8 @@ import Pages from './pages';
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-    uri: "http://localhost:4000",
+    // uri: "http://localhost:4000",
+    uri: "https://odyssey-lift-off-server-production-ad04.up.railway.app/",
     cache: new InMemoryCache(),
 });
 
