@@ -27,7 +27,7 @@ const INCREMENT_TRACK_VIEWS = gql`
  * for each track populating the tracks grid homepage.
  */
 const TrackCard = ({ track }) => {
-  const { title, thumbnail, author, length, modulesCount, id } = track;
+  const { title, thumbnail, author, durationInSeconds, modulesCount, id } = track;
   // https://www.apollographql.com/tutorials/lift-off-part4/08-the-usemutation-hook
   // The first element is the mutate function we'll use to actually run
   // the mutation later on. We'll call it incrementTrackViews. The second
@@ -59,7 +59,7 @@ const TrackCard = ({ track }) => {
               <AuthorName>{author.name}</AuthorName>
               <TrackLength>
                 {modulesCount} modules -{' '}
-                {humanReadableTimeFromSeconds(length)}
+                {humanReadableTimeFromSeconds(durationInSeconds)}
               </TrackLength>
             </AuthorAndTrack>
           </CardFooter>

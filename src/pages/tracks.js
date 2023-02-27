@@ -9,7 +9,7 @@ const TRACKS = gql`
     tracksForHome {
       id
       title
-      length
+      durationInSeconds
       modulesCount
       thumbnail
       author {
